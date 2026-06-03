@@ -8,7 +8,9 @@ const App = function () {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [toggleAlert, setToggleAlert] = useState(false);
     const [todos, setTodos] = useState([]);
-
+    const [filter, setFilter] = useState("yet");
+    const filterTodos =
+        filter === "all" ? [...todos] : todos.filter((todo) => todo.status === filter);
     const handleModal = function () {
         setIsModalOpen((isModalOpen) => !isModalOpen);
     };
@@ -18,8 +20,13 @@ const App = function () {
 
     return (
         <div className="App">
-            <Header />
-            <TodoBox handleModal={handleModal} todos={todos} setTodos={setTodos} />
+            <Header filter={filter} setFilter={setFilter} />
+            <TodoBox
+                handleModal={handleModal}
+                todos={todos}
+                setTodos={setTodos}
+                filterTodos={filterTodos}
+            />
             {isModalOpen && (
                 <Modal handle={isModalOpen} cl={"todo-modal"}>
                     <TodoModal handleModal={handleModal} todos={todos} setTodos={setTodos} />
