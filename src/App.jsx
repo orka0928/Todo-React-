@@ -10,8 +10,7 @@ const App = function () {
     const [updateForm, setUpdateForm] = useState(false);
     const [todos, setTodos] = useState([]);
     const [filter, setFilter] = useState("yet");
-    const filterTodos =
-        filter === "all" ? [...todos] : todos.filter((todo) => todo.status === filter);
+    const filterTodos = filter === "all" ? todos : todos.filter((todo) => todo.status === filter);
     const [upDateID, setUpdateID] = useState("");
 
     const handleModal = function () {
@@ -34,7 +33,12 @@ const App = function () {
             />
             {isModalOpen && (
                 <Modal cl={"todo-modal"}>
-                    <TodoModal handleModal={handleModal} todos={todos} setTodos={setTodos} />
+                    <TodoModal
+                        handleModal={handleModal}
+                        todos={todos}
+                        setTodos={setTodos}
+                        onToggleAlert={handleAlert}
+                    />
                 </Modal>
             )}
             {updateForm && (

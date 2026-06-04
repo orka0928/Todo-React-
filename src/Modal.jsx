@@ -7,16 +7,21 @@ const Modal = function ({ cl, children }) {
         </>
     );
 };
-const TodoModal = function ({ handleModal, setTodos }) {
+const TodoModal = function ({ handleModal, setTodos, onToggleAlert }) {
     const [main, setMain] = useState("");
     const [sub, setSub] = useState("");
     const [start, setStart] = useState("");
     const [deadline, setDeadLine] = useState("");
 
     const handleNewTodo = function () {
+        if (!main) {
+            onToggleAlert();
+            return;
+        }
         const id = crypto.randomUUID();
         const status = "yet";
         const newTodo = { id, main, sub, start, deadline, status };
+
         setTodos((todos) => [...todos, newTodo]);
     };
 
@@ -131,6 +136,7 @@ const AlertModal = function ({ handleAlert }) {
             <button type="button" className="alert-modal--close" onClick={handleAlert}>
                 &times;
             </button>
+            <p>mainは必ず入力してください</p>
         </>
     );
 };
