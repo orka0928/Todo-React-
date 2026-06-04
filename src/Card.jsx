@@ -38,7 +38,7 @@ const AddCard = function ({ handleModal }) {
         </div>
     );
 };
-const TodoCard = function ({ todo, setTodos }) {
+const TodoCard = function ({ todo, setTodos, setUpdateForm, setUpdateID }) {
     const handleUpdateStatus = function (status, id) {
         setTodos((todos) =>
             todos.map((_todo) => (_todo.id === id ? { ...todo, status: status } : _todo)),
@@ -47,7 +47,10 @@ const TodoCard = function ({ todo, setTodos }) {
     const handledelete = function (id) {
         setTodos((todos) => todos.filter((_todo) => _todo.id !== id));
     };
-
+    const handleUpdateForm = function (_id) {
+        setUpdateID((id) => _id);
+        setUpdateForm(true);
+    };
     return (
         <>
             <select
@@ -65,6 +68,13 @@ const TodoCard = function ({ todo, setTodos }) {
             <p>{todo.deadline}</p>
             <button type="button" className="todo--delete" onClick={() => handledelete(todo.id)}>
                 &times;
+            </button>
+            <button
+                type="button"
+                className="todo--delete"
+                onClick={() => handleUpdateForm(todo.id)}
+            >
+                編集
             </button>
         </>
     );

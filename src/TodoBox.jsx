@@ -1,6 +1,13 @@
 import { Card, AddCard, TodoCard } from "./Card";
 
-const TodoBox = function ({ handleModal, todos, setTodos, filterTodos }) {
+const TodoBox = function ({
+    handleModal,
+    todos,
+    setTodos,
+    setUpdateForm,
+    filterTodos,
+    setUpdateID,
+}) {
     return (
         <>
             <div className="todo-box">
@@ -10,7 +17,12 @@ const TodoBox = function ({ handleModal, todos, setTodos, filterTodos }) {
                 {filterTodos.map((todo) => {
                     return (
                         <Card cl={"todo-card"} status={todo.status} key={todo.id}>
-                            <TodoCard todo={todo} setTodos={setTodos} />
+                            <TodoCard
+                                todo={todo}
+                                setTodos={setTodos}
+                                setUpdateForm={setUpdateForm}
+                                setUpdateID={setUpdateID}
+                            />
                         </Card>
                     );
                 })}
